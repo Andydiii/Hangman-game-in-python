@@ -2,8 +2,6 @@ import random
 import string
 from words import words_list
 
-lives = 6
-
 def get_valid_word(words_list):
     target_word = random.choice(words_list)
     while '-' in target_word or ' ' in target_word:
@@ -11,6 +9,7 @@ def get_valid_word(words_list):
     return target_word
 
 def hangman():
+    lives = 6
     word = get_valid_word(words_list)
     word_letters = set(word) #letters in the target word
     all_possible_letter = set(string.ascii_lowercase)
