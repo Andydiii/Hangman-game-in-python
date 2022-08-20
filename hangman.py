@@ -17,13 +17,11 @@ def hangman():
 
     while len(word_letters) > 0 and lives > 0:
         #letter that already used
-        print('you have', lives, 'left and you have already used these words:', ' '.join(used_letters))
+        print('you have', lives, 'lives left and you have already used these words:', ' '.join(used_letters))
 
         #current words_list
         curr_word_list = [letter if letter in used_letters else '_' for letter in word]
         print("current_word:", ' '.join(curr_word_list))
-        #print("\n")
-
 
         user_letter = input("Guess a letter: ").lower()
         if user_letter in all_possible_letter - used_letters:
@@ -31,7 +29,7 @@ def hangman():
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
             else:
-                lives = lives - 1
+                lives -= 1
                 print("letter is not in the word")
         
         elif user_letter in used_letters:
