@@ -1,8 +1,8 @@
 import random
-from re import A
 import string
 from words import words_list
 
+lives = 6
 
 def get_valid_word(words_list):
     target_word = random.choice(words_list)
@@ -16,8 +16,9 @@ def hangman():
     all_possible_letter = set(string.ascii_lowercase)
     used_letters = set()
 
-    while len(word_letters) > 0:
-        print("you have already used these words:", ' '.join(used_letters))
+    while len(word_letters) > 0 and lives > 0:
+        #letter that already used
+        print('you have', lives, 'left and you have already used these words:', ' '.join(used_letters))
 
         #current words_list
         curr_word_list = [letter if letter in used_letters else '_' for letter in word]
@@ -30,6 +31,9 @@ def hangman():
             used_letters.add(user_letter)
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
+            else:
+                lives = lives - 1
+                print("letter is not in the word")
         
         elif user_letter in used_letters:
             print("pls guess other letters that you havent guessed")
@@ -37,8 +41,11 @@ def hangman():
         else:
             print("please enter a valid character")
         print("\n")
-        
-    print("congrats!!! you got it!", f"The word is {word}")
+    if lives == 0:
+        print('sorry, you died. The word is', word)
+    else:
+        print("congrats!!! you got it! The word is", word)
+
 hangman()
 
 
